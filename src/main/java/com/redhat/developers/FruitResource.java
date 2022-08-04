@@ -13,19 +13,28 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import io.quarkus.logging.Log;
+
 
 
 @Path("/fruit")
 public class FruitResource {
-    
+    FruitRepository fruitRepository;
+
+    public FruitResource(FruitRepository fruitRepository){ //Konstruktor
+        this.fruitRepository = fruitRepository;
+    }
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Fruit> fruits(@QueryParam("season") String season, @QueryParam("name") String name) { //Was bedeutet @QueryParam
-        if(name != null){
-            return Fruit.findByName(name);
+        if(name != null){ 
+            Log.infof("Searching for %s", name);
+            return fruitRepository.findByName(name);
         }
         if(season != null){
-            return Fruit.findBySeason(season);
+            Log.infof("Searching for %s fruits", season);
+            return fruitRepository.findBySeason(season);
         }
         return Fruit.listAll();
     }
