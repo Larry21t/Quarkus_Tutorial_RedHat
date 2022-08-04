@@ -20,7 +20,10 @@ public class FruitResource {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Fruit> fruits(@QueryParam("season") String season) { //Was bedeutet @QueryParam
+    public List<Fruit> fruits(@QueryParam("season") String season, @QueryParam("name") String name) { //Was bedeutet @QueryParam
+        if(name != null){
+            return Fruit.findByName(name);
+        }
         if(season != null){
             return Fruit.findBySeason(season);
         }

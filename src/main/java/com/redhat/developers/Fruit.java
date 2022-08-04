@@ -14,4 +14,8 @@ public class Fruit extends PanacheEntity {
     public static List<Fruit> findBySeason(String season){
         return find("season", season).list();
     }
+
+    public static List<Fruit> findByName(String name){
+        return find("name", name).list();
+    }
 }
