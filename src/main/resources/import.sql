@@ -7,3 +7,4 @@ INSERT INTO Fruit(id,name,season) VALUES (nextval('hibernate_sequence'),'Banana'
 INSERT INTO Fruit(id,name,season) VALUES (nextval('hibernate_sequence'),'Watermelon','Summer');
 INSERT INTO Fruit(id,name,season) VALUES (nextval('hibernate_sequence'),'Apple','Fall');
 INSERT INTO Fruit(id,name,season) VALUES (nextval('hibernate_sequence'),'Pear','Fall');
+INSERT INTO Fruit(id,name,season) VALUES (nextval('hibernate_sequence'),'Peach','Summer');

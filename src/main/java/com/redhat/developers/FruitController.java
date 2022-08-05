@@ -2,10 +2,7 @@ package com.redhat.developers;
 
 import java.util.List;
 
-import javax.ws.rs.PathParam;
-
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,10 +29,10 @@ public class FruitController {
         return fruitRepository.findAll();
     }
 
-    @GetMapping//Die folgende Funktion "getFruits" habe ich selber hinzugefügt -> nicht im Tutorial
-    @RequestMapping(path = "{name}") //Es kann in der URL nach /fruits noch einen Früchtenamen (z.B. /Apple) angehängt werden und dann wird die spezifische Frucht angzeigt. 
+    @GetMapping//Die folgende Funktion "getFruit" habe ich selber hinzugefügt -> nicht im Tutorial
+    @RequestMapping(path = "/{name}") //Es kann in der URL nach /fruits noch einen Früchtenamen (z.B. /Apple) angehängt werden und dann wird die spezifische Frucht angzeigt. 
     public List<Fruit> getFruit(@PathVariable("name") String name){ //@PathVariable ist wie @PathParam einfach für Spring
-        if(name != null){
+        if(name != null){ //Dieses if braucht es eigenltich hier nicht oder? Es würde reichen einfach return fruitRepository.findByName(name);
             return fruitRepository.findByName(name);
         }
         return Fruit.listAll();

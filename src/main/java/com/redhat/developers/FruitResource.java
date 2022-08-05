@@ -30,7 +30,7 @@ public class FruitResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Fruit> fruits(@QueryParam("season") String season, @QueryParam("name") String name) { //@QueryParam = Parameter aus Query(Abfrage) in der URL
         if(name != null){ 
-            Log.infof("Searching for %s", name); //Wo wird das protokolliert? -> Wenn man im Development-Modus  ist im Terminal
+            Log.infof("Searching for %s", name); //Wo wird das protokolliert? -> Wenn man im Development-Modus ist im Terminal
             return fruitRepository.findByName(name);
         }
         if(season != null){
@@ -42,8 +42,8 @@ public class FruitResource {
 
 
 
-    @GET//Die folgende Funktion "getFruits" habe ich selber hinzugefügt -> nicht im Tutorial
-    @Path("{name}")
+    @GET//Die folgende Funktion "getFruit" habe ich selber hinzugefügt -> nicht im Tutorial
+    @Path("/{name}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Fruit> getFruit(@PathParam("name") String name){ //Es kann in der URL nach /fruits noch einen Früchtenamen (z.B. /Apple) angehängt werden und dann wird die spezifische Frucht angzeigt. 
         if(name != null){
