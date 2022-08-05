@@ -2,7 +2,11 @@ package com.redhat.developers;
 
 import java.util.List;
 
+import javax.ws.rs.PathParam;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +30,15 @@ public class FruitController {
             return fruitRepository.findBySeason(season1); //Wo ist die Definition von findBySeason? Denn das SpringFruitRepository fruitRepository ist ja 
         }                                               // nur ein Interface mit der abstrakten Methode "findBySeason", wieso filtert er die Früchte trotzdem richtig nach Saison?
         return fruitRepository.findAll();
+    }
+
+    @GetMapping//Die folgende Funktion "getFruits" habe ich selber hinzugefügt -> nicht im Tutorial
+    @RequestMapping(path = "{name}") //Es kann in der URL nach /fruits noch einen Früchtenamen (z.B. /Apple) angehängt werden und dann wird die spezifische Frucht angzeigt. 
+    public List<Fruit> getFruit(@PathVariable("name") String name){ //@PathVariable ist wie @PathParam einfach für Spring
+        if(name != null){
+            return fruitRepository.findByName(name);
+        }
+        return Fruit.listAll();
     }
 
 }
