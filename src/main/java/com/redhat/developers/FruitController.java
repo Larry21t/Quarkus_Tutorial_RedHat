@@ -18,7 +18,7 @@ public class FruitController {
         this.fruitRepository = fruitRepository;
     }
 
-    @GetMapping
+    @GetMapping //Wie @GET aber für Spring
     public List<Fruit> fruits(@RequestParam("season") String season1, @RequestParam("name") String name1){ //Parameter season aus dem Web wird an den Methodenparameter season1 gebunden
         if(name1 != null){
             return fruitRepository.findByName(name1);  
@@ -26,7 +26,7 @@ public class FruitController {
         if(season1 != null){
             return fruitRepository.findBySeason(season1); //Wo ist die Definition von findBySeason? Denn das SpringFruitRepository fruitRepository ist ja 
         }                                               // nur ein Interface mit der abstrakten Methode "findBySeason", wieso filtert er die Früchte trotzdem richtig nach Saison?
-        return fruitRepository.findAll();
+        return fruitRepository.findAll(); //Wieso nicht Fruit.listAll()?
     }
 
     @GetMapping//Die folgende Funktion "getFruit" habe ich selber hinzugefügt -> nicht im Tutorial
