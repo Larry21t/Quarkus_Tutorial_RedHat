@@ -5,6 +5,6 @@ INSERT INTO Fruit(id,name,season) VALUES (nextval('hibernate_sequence'),'Lemon',
 INSERT INTO Fruit(id,name,season) VALUES (nextval('hibernate_sequence'),'Blueberry','Summer');
 INSERT INTO Fruit(id,name,season) VALUES (nextval('hibernate_sequence'),'Banana','Summer');
 INSERT INTO Fruit(id,name,season) VALUES (nextval('hibernate_sequence'),'Watermelon','Summer');
+INSERT INTO Fruit(id,name,season) VALUES (nextval('hibernate_sequence'),'Cherry','Summer');
 INSERT INTO Fruit(id,name,season) VALUES (nextval('hibernate_sequence'),'Apple','Fall');
 INSERT INTO Fruit(id,name,season) VALUES (nextval('hibernate_sequence'),'Pear','Fall');
-INSERT INTO Fruit(id,name,season) VALUES (nextval('hibernate_sequence'),'Peach','Summer');

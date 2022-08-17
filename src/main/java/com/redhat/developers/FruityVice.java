@@ -13,7 +13,7 @@ public class FruityVice {
         this.nutritions = nutrions;
     }
 
-    @JsonbCreator //Wenn eine Instanz dieser Klasse erzeugt wird, dann wird automatisch die Methode mit dieser Annotation aufgerufen. 
+    @JsonbCreator //Wenn eine Instanz dieser Klasse erzeugt wird, dann wird automatisch die Methode mit dieser Annotation aufgerufen. Für was braucht es diesen Konstruktor, reicht nicht der Normale hier oben?
     public static FruityVice of(String name, Nutritions nutritions){ //Was bedeutet das of() hier? //Was macht diese Funktion genau bzw. was nützt sie?
         return new FruityVice(name, nutritions);
     }
@@ -26,20 +26,23 @@ public class FruityVice {
         return nutritions;
     }
 
-    public static class Nutritions{
+    public static class Nutritions{ //nur die Klasse FruityVice braucht die Nutritions Klasse, deshalb wird sie direkt in der Klasse FruityVice definiert -> nested classes
 
         private double carbohydrates;
 
         private double calories;
 
-        Nutritions(double carbohydrates, double calories){ //Konstruktor
+        private double sugar;
+
+        Nutritions(double carbohydrates, double calories, double sugar){ //Konstruktor
             this.carbohydrates = carbohydrates;
             this.calories = calories;
+            this.sugar = sugar;
         }
 
         @JsonbCreator
-        public static Nutritions of(double carbohydrates, double calories) {
-            return new Nutritions(carbohydrates, calories);
+        public static Nutritions of(double carbohydrates, double calories, double sugar) {  //Für was braucht es diesen Konstruktor, reicht nicht der Normale hier oben?
+            return new Nutritions(carbohydrates, calories, sugar);
         }
 
         public double getCarbohydrates(){ //Getter
@@ -48,6 +51,10 @@ public class FruityVice {
 
         public double getCalories(){ //Getter
             return calories;
+        }
+
+        public double getSugar(){ //Getter
+            return sugar;
         }
     }
 }

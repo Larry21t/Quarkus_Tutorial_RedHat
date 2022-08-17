@@ -11,11 +11,11 @@ public class Fruit extends PanacheEntity {
     public String name;
     public String season;
 
-    public static List<Fruit> findBySeason(String season){ //Diese Funktion braucht man hier eigentlich nicht mehr, da man auf die Funktion im FruitRepository zugreift.
+    public static List<Fruit> findBySeason(String season){  
         return find("season", season).list(); //Gibt Liste mit den Früchten, die die bestimmte Saison haben zurück.
     }
 
-    public static List<Fruit> findByName(String name){ //Diese Funktion braucht man hier eigentlich nicht mehr, da man auf die Funktion im FruitRepository zugreift.
+    public static List<Fruit> findByName(String name){  
         return find("name", name).list();
     }
 }
