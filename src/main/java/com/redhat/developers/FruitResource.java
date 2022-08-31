@@ -28,21 +28,21 @@ public class FruitResource {
 
   /*public FruitResource(FruitRepository fruitRepository){ //Konstruktor
         this.fruitRepository = fruitRepository;
-    }*/
+    }
 
-    // @GET //Die Methode mit diesem Dekorator kann HTTP-GET-Requests generieren, also vom Server eine Ressource abrufen
-    // @Produces(MediaType.APPLICATION_JSON) //Definiert Medientyp, welchen die Ressource erstellen kann und als Antwort an Client schickt. 
-    // public List<Fruit> fruits(@QueryParam("season") String season, @QueryParam("name") String name) { //@QueryParam = Parameter aus Query(?season=Summer) in der URL 
-    //     if(name != null){ 
-    //         Log.infof("Searching for %s", name); //Wo wird das protokolliert? -> Wenn man im Development-Modus ist im Terminal
-    //         return fruitRepository.findByName(name);
-    //     }
-    //     if(season != null){
-    //         Log.infof("Searching for %s fruits", season);
-    //         return fruitRepository.findBySeason(season);
-    //     }
-    //     return Fruit.listAll();
-    // }
+    @GET //Die Methode mit diesem Dekorator kann HTTP-GET-Requests generieren, also vom Server eine Ressource abrufen
+    @Produces(MediaType.APPLICATION_JSON) //Definiert Medientyp, welchen die Ressource erstellen kann und als Antwort an Client schickt. 
+    public List<Fruit> fruits(@QueryParam("season") String season, @QueryParam("name") String name) { //@QueryParam = Parameter aus Query(?season=Summer) in der URL 
+        if(name != null){ 
+            Log.infof("Searching for %s", name); //Wo wird das protokolliert? -> Wenn man im Development-Modus ist im Terminal
+            return fruitRepository.findByName(name);
+        }
+        if(season != null){
+            Log.infof("Searching for %s fruits", season);
+            return fruitRepository.findBySeason(season);
+        }
+        return Fruit.listAll();
+    } */
 
 
 
@@ -61,7 +61,6 @@ public class FruitResource {
     }
 
 
-
     @Transactional //Kennzeichnet Übertragung von Daten
     @POST //Diese Methode mit dem Dekorator, kann HTTP-Post-Requests generieren
     @Consumes(MediaType.APPLICATION_JSON) //Definiert welchen Medientyp der Server akzeptiert
@@ -75,17 +74,20 @@ public class FruitResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<FruitDTO> fruits(@QueryParam("season") String season) {
+    public List<FruitDTO> fruits(@QueryParam("season") String season, @QueryParam("name") String name) {
         if (season != null) {
             return Fruit.findBySeason(season).stream() //Alle Früchte, die die bestimmte Saison haben, werden mit den Infos aufgelistet
                 .map(fruit -> FruitDTO.of(fruit, fruityViceService.getFruitByName(fruit.name)))
                 .collect(Collectors.toList()); //Damit ein Stream zu einer Liste umgewandelt wird und als Liste zurückgegeben wird. 
         }
+        if (name != null){
+            return Fruit.findByName(name).stream()
+                .map(fruit -> FruitDTO.of(fruit, fruityViceService.getFruitByName(fruit.name)))
+                .collect(Collectors.toList());
+        }
         return Fruit.<Fruit>listAll().stream() //Wenn keine Saison angegeben wird, dann werden alle Früchte mit den Infos aufgelistet. 
                 .map(fruit -> FruitDTO.of(fruit, fruityViceService.getFruitByName(fruit.name))) //Was macht of genau?
                 .collect(Collectors.toList()); 
     }
-    
-
 
 }
